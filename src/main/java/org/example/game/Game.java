@@ -8,10 +8,31 @@ import org.example.game.Monster;
 public class Game {
     Scanner sc = new Scanner(System.in);
 
-    //몬스터 객체 생성과 동시에 값 지정(몬스터는 유저에게 입력받지 않기 때문)
-    Monster monster1 = new Monster("초보 몬스터 🧟‍", 20, 100);
-    Monster monster2 = new Monster("중급 몬스터 🧟", 30, 300);
-    Monster bossMonster = new Monster("보스 몬스터 🧟", 50, 700);
+    //몬스터 객체 생성
+    Monster[] monster1 = new Monster[0];
+    Monster[] monster2 = new Monster[1];
+    Monster[] monster3 = new Monster[2];
+    Monster[] monster4 = new Monster[3];
+    Monster[] monster5 = new Monster[4];
+    Monster[] monster6 = new Monster[5];
+
+    //무기 객체 생성
+    Weapon[] beginnerSword = new Weapon[0];
+    Weapon[] beginnerBow = new Weapon[1];
+    Weapon[] intermediateSword = new Weapon[2];
+    Weapon[] intermediateBow = new Weapon[3];
+    Weapon[] advancedSword = new Weapon[4];
+    Weapon[] advancedBow = new Weapon[5];
+    Weapon[] masterSword = new Weapon[6];
+    Weapon[] masterBow = new Weapon[7];
+
+    //펫 객체 생성
+
+    Pet[] hamster = new Pet[0];
+    Pet[] dog = new Pet[1];
+    Pet[] rabbit = new Pet[2];
+    Pet[] cat = new Pet[3];
+
 
     //용사 객체 생성
     Soldier soldier = new Soldier();
@@ -22,15 +43,16 @@ public class Game {
         //용사 이름 입력
         System.out.println("[ 이름 입력 ] ");
         System.out.print("용사의 이름을 입력하세요 🦹🏻: ");
-        soldier.setName(sc.nextLine());
+        soldier.setSoldierName(sc.nextLine());
         System.out.println(" ");
 
         //용사 무기 선택
         System.out.println("[ 무기 선택 옵션 ]");
-        System.out.println("옵션1. 초보자의 무기 1을 선택하려면 숫자 1을 눌러주세요.");
-        System.out.println("옵션2. 초보자의 무기 2를 선택하려면 숫자 2를 눌러주세요.");
+        for (int i = 0; i < 2; i++) {
+            System.out.println("옵션 " + (i + 1) + ". " + );
+        }
         System.out.print("용사가 사용할 무기를 선택하세요 ⚔️: ");
-        soldier.setWeapon(sc.nextInt());
+        (sc.nextInt());
         System.out.println(" ");
 
         //용사 펫 선택
