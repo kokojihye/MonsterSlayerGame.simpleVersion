@@ -3,43 +3,46 @@ package org.example.game;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
-import org.example.game.Monster;
+import org.example.game.*;
 
 public class Game {
     Scanner sc = new Scanner(System.in);
 
     //몬스터 객체 생성
-    Monster[] monster1 = new Monster[0];
-    Monster[] monster2 = new Monster[1];
-    Monster[] monster3 = new Monster[2];
-    Monster[] monster4 = new Monster[3];
-    Monster[] monster5 = new Monster[4];
-    Monster[] monster6 = new Monster[5];
-
+    Monster monsters[] = {
+            new Monster("파란 달팽이", 20, 100),
+            new Monster("빨간 달팽이", 30, 120),
+            new Monster("슬라임", 40, 150),
+            new Monster("리본 돼지", 50, 170),
+            new Monster("주황 버섯", 70, 200),
+            new Monster("초록 버섯", 80, 220)
+    };
     //무기 객체 생성
-    Weapon[] beginnerSword = new Weapon[0];
-    Weapon[] beginnerBow = new Weapon[1];
-    Weapon[] intermediateSword = new Weapon[2];
-    Weapon[] intermediateBow = new Weapon[3];
-    Weapon[] advancedSword = new Weapon[4];
-    Weapon[] advancedBow = new Weapon[5];
-    Weapon[] masterSword = new Weapon[6];
-    Weapon[] masterBow = new Weapon[7];
+    Weapon weapons[] = {
+            new Weapon(1, " 🗡️초보자의 칼", 16),
+            new Weapon(2, " 🏹초보자의 활", 20),
+            new Weapon(3, " 🗡️중급자의 칼", 24),
+            new Weapon(4, " 🏹중급자의 활", 30),
+            new Weapon(5, " 🗡️상급자의 칼", 32),
+            new Weapon(6, " 🏹상급자의 활", 40),
+            new Weapon(7, " 🗡️마스터의 칼", 100),
+            new Weapon(8, " 🏹마스터의 활", 111)
+    };
 
     //펫 객체 생성
-
-    Pet[] hamster = new Pet[0];
-    Pet[] dog = new Pet[1];
-    Pet[] rabbit = new Pet[2];
-    Pet[] cat = new Pet[3];
-
+    Pet[] pets = {
+            //후보생: 🐯(+10) 🐭(-2)
+            new Pet(1, "🐹햄스터", 3),
+            new Pet(3, "🐰토끼", 4),
+            new Pet(2, "🐶강아지", 5),
+            new Pet(4, "🐱고양이", 7)
+    };
 
     //용사 객체 생성
     Soldier soldier = new Soldier();
 
     //용사 정보 입력 받기
     public void setSoldierInformation(){
-
         //용사 이름 입력
         System.out.println("[ 이름 입력 ] ");
         System.out.print("용사의 이름을 입력하세요 🦹🏻: ");
@@ -47,21 +50,35 @@ public class Game {
         System.out.println(" ");
 
         //용사 무기 선택
+        int weaponOptionNum;
         System.out.println("[ 무기 선택 옵션 ]");
-        for (int i = 0; i < 2; i++) {
-            System.out.println("옵션 " + (i + 1) + ". " + );
+        for (int i = 0; i < 2; i++) { //초보자의 무기만 선택 가능하도록 i < 2 조건 걸어둠
+            System.out.println("옵션 " + (i + 1) + ". " + weapons[i] + "을 선택하려면 숫자" + (i + 1) + "를 입력하세요.");
         }
         System.out.print("용사가 사용할 무기를 선택하세요 ⚔️: ");
-        (sc.nextInt());
+        weaponOptionNum = sc.nextInt();
+        for (int i = 0; i < weapons.length; i++) {
+            if (weaponOptionNum == weapons[i].weaponNum){
+                soldier.setCurrentWeapon(weapons[i-1].getWeaponName());
+                System.out.println("당신이 사용할 무기는 " + weapons[i].getWeaponName()+ "입니다.");
+            }
+        }
         System.out.println(" ");
 
         //용사 펫 선택
+        int petOptionNum;
         System.out.println("[ 펫 선택 ] ");
-        System.out.println("옵션 1. 고양이와 함께하려면 숫자 1을 눌러주세요. 🐱");
-        System.out.println("옵션 2. 강아지와 함께하려면 숫자 2를 눌러주세요. 🐶");
-        System.out.println("옵션 3. 홀로 몬스터와 싸우려면 숫자 3을 눌러주세요. 😿");
+        for (int i = 0; i < pets.length; i++) {
+            System.out.println("옵션" + (i + 1) +  pets[i].petName + "을 선택하려면 숫자" + (i + 1) + "를 입력하세요.");
+        }
         System.out.print("용사와 함께할 펫을 선택하세요: ");
-        soldier.setPet(sc.nextInt());
+        petOptionNum = sc.nextInt();
+        for (int i = 0; i < pets.length; i++) {
+            if (weaponOptionNum == pets[i].petNum){
+                soldier.setCurrentWeapon(pets[i].getPetName());
+                System.out.println("당신과 함께할 펫은 " + pets[i].getPetName()+ "입니다.");
+            }
+        }
         System.out.println(" ");
     }
 

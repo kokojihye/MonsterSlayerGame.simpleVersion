@@ -11,15 +11,6 @@ public class Monster {
         this.monsterHP = hp;
     }
 
-    Monster monsters[] = {
-            new Monster("파란 달팽이", 20, 100),
-            new Monster("빨간 달팽이", 30, 120),
-            new Monster("슬라임", 40, 150),
-            new Monster("리본 돼지", 50, 170),
-            new Monster("주황 버섯", 70, 200),
-            new Monster("초록 버섯", 80, 220)
-    };
-
 
     public String getName() {
         return name;
@@ -33,9 +24,6 @@ public class Monster {
         return monsterHP;
     }
 
-    public Monster[] getMonsters() {
-        return monsters;
-    }
 
     public void setMonsterAttackPower(int monsterAttackPower) {
         this.monsterAttackPower = monsterAttackPower;

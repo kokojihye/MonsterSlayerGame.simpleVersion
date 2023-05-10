@@ -6,7 +6,10 @@ public class Soldier {
     private String soldierName;
     private int soldierHP = 200;
     private int soldierCurrentHP;
+    private String currentWeapon;
+    private String currentPet;
 
+    //Setter
     public void setSoldierName(String soldierName) {
         this.soldierName = soldierName;
     }
@@ -19,8 +22,37 @@ public class Soldier {
         this.soldierCurrentHP = soldierCurrentHP;
     }
 
+    public void setCurrentWeapon(String currentWeapon) {
+        this.currentWeapon = currentWeapon;
+    }
+
+    public void setCurrentPet(String currentPet) {
+        this.currentPet = currentPet;
+    }
+
+    //Getter
+    public String getSoldierName() {
+        return soldierName;
+    }
+
+    public int getSoldierHP() {
+        return soldierHP;
+    }
+
+    public int getSoldierCurrentHP() {
+        return soldierCurrentHP;
+    }
+
+    public String getCurrentWeapon() {
+        return currentWeapon;
+    }
+
+    public String getCurrentPet() {
+        return currentPet;
+    }
+
     public void showCurrentHP() {
-        System.out.println("HP( " + this.soldierCurrentHP + " / " + this.soldierHP + " )");
+        System.out.println("❤️HP[ " + this.soldierCurrentHP + " / " + this.soldierHP + " ]");
     }
 
 //    public void soldierCurrentHP() {
