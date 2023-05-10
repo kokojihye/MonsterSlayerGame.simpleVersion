@@ -13,8 +13,10 @@ public class Main {
         //게임 시작
         System.out.println(" 🌳 🌳 🌳 . . 모험을 시작합니다 . . 🌳 🌳 🌳");
         System.out.println(" ");
-        game.monster1Appears();
-        game.monster2Appears();
-        game.bossMonsterAppears();
+//        game.monsterAppears();
+//        game.monsterAppears();
+//        game.monsterAppears();
+//        game.monsterAppears();
+//        game.monsterAppears();
     }
 }

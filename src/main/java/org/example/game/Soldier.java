@@ -6,8 +6,10 @@ public class Soldier {
     private String soldierName;
     private int soldierHP = 200;
     private int soldierCurrentHP;
-    private String currentWeapon;
-    private String currentPet;
+    private String currentWeaponName;
+    private int currentWeaponNum;
+    private String currentPetName;
+    private int currentPetNum;
 
     //Setter
     public void setSoldierName(String soldierName) {
@@ -18,16 +20,24 @@ public class Soldier {
         this.soldierHP = soldierHP;
     }
 
-    public void setSoldierCurrentHP(int soldierCurrentHP) {
-        this.soldierCurrentHP = soldierCurrentHP;
+    public void setSoldierCurrentHP(int damage) {
+        this.soldierCurrentHP -= damage;
     }
 
-    public void setCurrentWeapon(String currentWeapon) {
-        this.currentWeapon = currentWeapon;
+    public void setCurrentWeaponName(String currentWeaponName) {
+        this.currentWeaponName = currentWeaponName;
     }
 
-    public void setCurrentPet(String currentPet) {
-        this.currentPet = currentPet;
+    public void setCurrentPetName(String currentPetName) {
+        this.currentPetName = currentPetName;
+    }
+
+    public void setCurrentWeaponNum(int currentWeaponNum) {
+        this.currentWeaponNum = currentWeaponNum;
+    }
+
+    public void setCurrentPetNum(int currentPetNum) {
+        this.currentPetNum = currentPetNum;
     }
 
     //Getter
@@ -43,24 +53,30 @@ public class Soldier {
         return soldierCurrentHP;
     }
 
-    public String getCurrentWeapon() {
-        return currentWeapon;
+    public String getCurrentWeaponName() {
+        return currentWeaponName;
     }
 
-    public String getCurrentPet() {
-        return currentPet;
+    public String getCurrentPetName() {
+        return currentPetName;
     }
 
-    public void showCurrentHP() {
-        System.out.println("❤️HP[ " + this.soldierCurrentHP + " / " + this.soldierHP + " ]");
+    public int getCurrentWeaponNum() {
+        return currentWeaponNum;
     }
 
-//    public void soldierCurrentHP() {
-//        if (this.currentHP <= 0){
-//            System.out.println(this.name + "의 hp가 0이 되어 사망했습니다. ☠️");
-//            //System.out.println("메인 화면으로 돌아갑니다");
-//        } else{
-//            System.out.println(this.name + "의 남은 체력: " + this.currentHP);
-//        }
-//    }
+    public int getCurrentPetNum() {
+        return currentPetNum;
+    }
+
+    public void soldierCurrentHP() {
+        if (this.soldierCurrentHP <= 0){
+            System.out.println(this.soldierName + "의 hp가 0이 되어 사망했습니다. ☠️");
+            //System.out.println("메인 화면으로 돌아갑니다");
+        } else{
+            System.out.println("❤️HP[ " + this.soldierCurrentHP + " / " + this.soldierHP + " ]");
+        }
+    }
+
+
 }

@@ -81,6 +81,43 @@ public class Game {
         }
         System.out.println(" ");
     }
+    public void soldierAttackMessage(int weaponNum) {
+        System.out.println("몬스터에게 " + weapons[weaponNum - 1].getWeaponAttackPower()+ "만큼 데미지를 주었습니다. 🩸");
+    }
+    public void monsterAttackMessage(Monster[] monster, int i) {
+        System.out.println(monster[i].getMonsterName() + "에게 " + monster[i].getMonsterAttackPower()+ "만큼 데미지를 받았습니다. 🩸");
+    }
+
+    public void monsterAppears(Monster[] monster, int i) throws InterruptedException {
+        monster[i].monsterAppearNotice(monster, i);
+        int countAttack = 1;
+
+        while(true){
+            System.out.println(" ");
+            System.out.println(countAttack + "번째 전투입니다.");
+            countAttack++;
+
+            System.out.println("⚔️ . . . 몬스터와 " + soldier.getSoldierName() + "이(가) 전투중입니다 . . . ⚔️");
+            TimeUnit.SECONDS.sleep(3);
+
+            //용사 선공
+            soldierAttackMessage(soldier.getCurrentWeaponNum());
+            //몬스터 체력 차감: 무기
+            //monster[i].setMonsterCurrentHP(weapons[weaponNum - 1]);
+            //몬스터 체력 차감: 펫
+            //monster[i].setMonsterCurrentHP();
+            //몬스터 체력 출력
+            monster[i].monsterCurrentHP();
+
+            //몬스터 후공
+            monsterAttackMessage(monster, i);
+            //용사 체력 차감: 몬스터 공격력
+            //soldier.setSoldierCurrentHP();
+            //용사 체력 출력
+            soldier.soldierCurrentHP();
+
+        }
+    }
 
     public void monster1Appears() throws InterruptedException {
         monster1.monsterAppearNotice();
@@ -89,24 +126,6 @@ public class Game {
 
         while (true) {
             //몬스터1 VS 용사
-            System.out.println(" ");
-            System.out.println(countAttack + "번째 전투입니다.");
-            countAttack++;
-
-            System.out.println("⚔️ . . . 몬스터와 " + soldier.getName() + "이(가) 전투중입니다 . . . ⚔️");
-            TimeUnit.SECONDS.sleep(3);
-
-            this.soldier.soldierAttackMessage(); //용사 선공
-            this.monster1.monsterHP -= this.soldier.getWeaponPower(); //몬스터 체력 = 몬스터 체력 - 용사 공격력
-            this.monster1.monsterHP -= this.soldier.getPetPower(); //몬스터 체력 = 몬스터 체력 - 펫 공격력
-            this.monster1.monsterCurrentHP();
-            System.out.println(" ");
-
-            this.monster1.monsterAttackMessage(); //몬스터 후공
-            this.soldier.currentHP -= this.monster1.attackPower; //용사 체력 = 용사체력 - 몬스터 공격력
-            this.soldier.soldierCurrentHP();
-
-
             if (this.soldier.currentHP <= 0) {
                 System.out.println(" ");
                 System.out.println(this.monster1.name + "에게 목숨을 잃었습니다.");
@@ -136,101 +155,51 @@ public class Game {
         }
     }
 
-    public void monster2Appears() throws InterruptedException {
-        monster2.monsterAppearNotice();
-        int countAttack = 1;
-        while (true) {
-            System.out.println(" ");
-            System.out.println(countAttack + "번째 전투입니다.");
-            countAttack++;
-            //몬스터2 VS 용사
 
-            System.out.println("⚔️ . . . 몬스터와 " + soldier.getName() + "이(가) 전투중입니다 . . . ⚔️");
-            TimeUnit.SECONDS.sleep(3);
-
-            this.soldier.soldierAttackMessage(); //용사 선공
-            this.monster2.monsterHP -= this.soldier.getWeaponPower(); //몬스터 체력 = 몬스터 체력 - 용사 공격력
-            this.monster2.monsterHP -= this.soldier.getPetPower(); //몬스터 체력 = 몬스터 체력 - 펫 공격력
-            this.monster2.monsterCurrentHP();
-            System.out.println(" ");
-
-            this.monster2.monsterAttackMessage(); //몬스터 후공
-            this.soldier.currentHP -= this.monster2.attackPower; //용사 체력 = 용사체력 - 몬스터 공격력
-            this.soldier.soldierCurrentHP();
-
-            if (this.soldier.currentHP <= 0) {
-                System.out.println(" ");
-                System.out.println(this.monster2.name + "에게 목숨을 잃었습니다.");
-                System.out.println("============== GAME OVER ==============");
-                return;
-                //System.exit(0);
-            } else if (this.monster2.monsterHP <= 0) {
-                System.out.println(" ");
-                System.out.println("축하합니다!🎉" + this.monster2.name + "을(를) 해치웠습니다.");
-                TimeUnit.SECONDS.sleep(1);
-
-                System.out.println("축하합니다!🎉" + soldier.getName() + "의 hp가 +150만큼 증가했습니다.");
-                this.soldier.setHp(150);
-
-                System.out.println("축하합니다!🎉" + soldier.getName() + "의 공격력이 +20만큼 증가했습니다.");
-                this.soldier.setWeaponPower(20);
-
-                System.out.println("축하합니다!🎉 펫" + this.soldier.getPetName() + "의 공격력이 +10만큼 증가했습니다.");
-                this.soldier.setPetPower(10);
-
-
-                this.soldier.currentHP = this.soldier.getHp();
-                System.out.println(" ");
-                System.out.println("🌳 🌳 🌳 . . 모험을 계속 진행합니다 . . 🌳 🌳 🌳");
-                break;
-            }
-        }
-    }
-
-    public void bossMonsterAppears() throws InterruptedException {
-        bossMonster.monsterAppearNotice();
-        int countAttack = 1;
-        while (true) {
-            System.out.println(" ");
-            System.out.println(countAttack + "번째 전투입니다.");
-            countAttack++;
-            //보스몹 VS 용사
-
-            System.out.println("⚔️ . . . 몬스터와 " + soldier.getName() + "이(가) 전투중입니다 . . . ⚔️");
-            TimeUnit.SECONDS.sleep(3);
-
-            this.soldier.soldierAttackMessage(); //용사 선공
-            this.bossMonster.monsterHP -= this.soldier.getWeaponPower(); //몬스터 체력 = 몬스터 체력 - 용사 공격력
-            this.bossMonster.monsterHP -= this.soldier.getPetPower(); //몬스터 체력 = 몬스터 체력 - 펫 공격력
-            this.bossMonster.monsterCurrentHP();
-            System.out.println(" ");
-
-            this.bossMonster.monsterAttackMessage(); //몬스터 후공
-            this.soldier.currentHP -= this.bossMonster.attackPower; //용사 체력 = 용사체력 - 몬스터 공격력
-            this.soldier.soldierCurrentHP();
-
-            if (this.soldier.currentHP <= 0) {
-                System.out.println(" ");
-                System.out.println(this.bossMonster.name + "에게 목숨을 잃었습니다.");
-                System.out.println("============== GAME OVER ==============");
-                //System.exit(0);
-                return;
-            } else if (this.bossMonster.monsterHP <= 0) {
-                System.out.println(" ");
-                System.out.println("축하합니다!🎉" + this.bossMonster.name + "을(를) 해치웠습니다.👏🏻");
-                TimeUnit.SECONDS.sleep(2);
-                System.out.println(" >> 중급자의 무기을(를) 획득했습니다.👏🏻");
-                TimeUnit.SECONDS.sleep(2);
-                System.out.println(" >> 용맹한 용사 칭호을(를) 획득했습니다.👏🏻");
-                TimeUnit.SECONDS.sleep(2);
-                System.out.println(" >> " + this.soldier.getPetName() + "도 집으로 무사히 돌아갔습니다.👏🏻");
-                TimeUnit.SECONDS.sleep(2);
-                System.out.println(" >> 마을에 평화가 찾아왔습니다.👏🏻");
-                System.out.println("============== HAPPY ENDING ==============");
-                System.exit(0);
-            }
-        }
-    }
+//    public void bossMonsterAppears() throws InterruptedException {
+//        bossMonster.monsterAppearNotice();
+//        int countAttack = 1;
+//        while (true) {
+//            System.out.println(" ");
+//            System.out.println(countAttack + "번째 전투입니다.");
+//            countAttack++;
+//            //보스몹 VS 용사
+//
+//            System.out.println("⚔️ . . . 몬스터와 " + soldier.getName() + "이(가) 전투중입니다 . . . ⚔️");
+//            TimeUnit.SECONDS.sleep(3);
+//
+//            this.soldier.soldierAttackMessage(); //용사 선공
+//            this.bossMonster.monsterHP -= this.soldier.getWeaponPower(); //몬스터 체력 = 몬스터 체력 - 용사 공격력
+//            this.bossMonster.monsterHP -= this.soldier.getPetPower(); //몬스터 체력 = 몬스터 체력 - 펫 공격력
+//            this.bossMonster.monsterCurrentHP();
+//            System.out.println(" ");
+//
+//            this.bossMonster.monsterAttackMessage(); //몬스터 후공
+//            this.soldier.currentHP -= this.bossMonster.attackPower; //용사 체력 = 용사체력 - 몬스터 공격력
+//            this.soldier.soldierCurrentHP();
+//
+//            if (this.soldier.currentHP <= 0) {
+//                System.out.println(" ");
+//                System.out.println(this.bossMonster.name + "에게 목숨을 잃었습니다.");
+//                System.out.println("============== GAME OVER ==============");
+//                //System.exit(0);
+//                return;
+//            } else if (this.bossMonster.monsterHP <= 0) {
+//                System.out.println(" ");
+//                System.out.println("축하합니다!🎉" + this.bossMonster.name + "을(를) 해치웠습니다.👏🏻");
+//                TimeUnit.SECONDS.sleep(2);
+//                System.out.println(" >> 중급자의 무기을(를) 획득했습니다.👏🏻");
+//                TimeUnit.SECONDS.sleep(2);
+//                System.out.println(" >> 용맹한 용사 칭호을(를) 획득했습니다.👏🏻");
+//                TimeUnit.SECONDS.sleep(2);
+//                System.out.println(" >> " + this.soldier.getPetName() + "도 집으로 무사히 돌아갔습니다.👏🏻");
+//                TimeUnit.SECONDS.sleep(2);
+//                System.out.println(" >> 마을에 평화가 찾아왔습니다.👏🏻");
+//                System.out.println("============== HAPPY ENDING ==============");
+//                System.exit(0);
+//            }
+//        }
+//    }
 }
 
 

@@ -1,19 +1,21 @@
 package org.example.game;
 
 public class Monster {
-    String name;
+    String monsterName;
     int monsterAttackPower;
     int monsterHP;
+    int monsterCurrentHP;
 
-    public Monster(String name, int monsterAttackPower, int hp) {
-        this.name = name;
+    public Monster(String monsterName, int monsterAttackPower, int hp) {
+        this.monsterName = monsterName;
         this.monsterAttackPower = monsterAttackPower;
         this.monsterHP = hp;
+        this.monsterCurrentHP = hp;
     }
 
-
-    public String getName() {
-        return name;
+    //Getter
+    public String getMonsterName() {
+        return monsterName;
     }
 
     public int getMonsterAttackPower() {
@@ -24,22 +26,27 @@ public class Monster {
         return monsterHP;
     }
 
+    public int getMonsterCurrentHP() {
+        return monsterCurrentHP;
+    }
 
     public void setMonsterAttackPower(int monsterAttackPower) {
         this.monsterAttackPower = monsterAttackPower;
     }
 
-    public void monsterAppearNotice(Monster[] monsters) {
-        System.out.println("야생의 " + monsters[0].getName() + "이(가) 나타났다.");
+    public void setMonsterCurrentHP(int damage) {
+        this.monsterCurrentHP -= damage;
     }
-//    public void monsterAttackMessage() {
-//        System.out.println("몬스터에게 " + this.attackPower + "만큼 데미지를 받았습니다. 🩸");
-//    }
-//    public void monsterCurrentHP() {
-//        if (this.monsterHP <= 0){
-//            System.out.println(this.name + "이(가) 사망했습니다. ☠️");
-//        } else{
-//            System.out.println(this.name + "의 남은 체력: " + this.monsterHP);
-//        }
-//    }
+
+    public void monsterAppearNotice(Monster[] monsters, int i) {
+        System.out.println("야생의 " + monsters[i].getMonsterName() + "이(가) 나타났다.");
+    }
+
+    public void monsterCurrentHP() {
+        if (this.monsterHP <= 0){
+            System.out.println(getMonsterName() + "이(가) 사망했습니다. ☠️");
+        } else{
+            System.out.println(System.out.println("HP[ " + getMonsterCurrentHP() + " / " + getMonsterHP()+ " ]");
+        }
+    }
 }
