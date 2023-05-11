@@ -19,6 +19,10 @@ public class Weapon {
         return weaponAttackPower;
     }
 
+    public int getWeaponNum() {
+        return weaponNum;
+    }
+
     public void setWeaponAttackPower(int weaponAttackPower) {
         this.weaponAttackPower += weaponAttackPower;
     }

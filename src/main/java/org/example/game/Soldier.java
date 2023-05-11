@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Soldier {
     private String soldierName;
-    private int soldierHP = 200;
+    private int soldierHP = 200; //용사의 초기 체력은 200으로 설정
     private int soldierCurrentHP;
     private String currentWeaponName;
     private int currentWeaponNum;
@@ -18,6 +18,10 @@ public class Soldier {
 
     public void setSoldierHP(int soldierHP) {
         this.soldierHP = soldierHP;
+    }
+
+    public void fillSoldierCurrentHP(int hp){
+        this.soldierCurrentHP = hp;
     }
 
     public void setSoldierCurrentHP(int damage) {

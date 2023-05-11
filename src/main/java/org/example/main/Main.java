@@ -13,10 +13,8 @@ public class Main {
         System.out.println(" ");
         game.monsterAppears(0);
         game.engageInBattle(0);
-        game.battleResult(0);
 
         game.monsterAppears(1);
         game.engageInBattle(1);
-        game.battleResult(1);
     }
 }

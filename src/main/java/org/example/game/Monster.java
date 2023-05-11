@@ -34,6 +34,16 @@ public class Monster {
         return monsterCurrentHP;
     }
 
+    public int getGiveExperienceValueToWeapon() {
+        return giveExperienceValueToWeapon;
+    }
+
+    public int getGiveExperienceValueToPet() {
+        return giveExperienceValueToPet;
+    }
+
+
+    //Setter
     public void setMonsterAttackPower(int monsterAttackPower) {
         this.monsterAttackPower = monsterAttackPower;
     }
@@ -42,6 +52,8 @@ public class Monster {
         this.monsterCurrentHP -= damage;
     }
 
+
+    //Method
     public void monsterAppearNotice(Monster[] monsters, int i) {
         System.out.println("야생의 " + monsters[i].getMonsterName() + "이(가) 나타났다.");
     }
