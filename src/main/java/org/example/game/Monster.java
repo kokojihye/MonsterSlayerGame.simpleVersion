@@ -5,12 +5,16 @@ public class Monster {
     int monsterAttackPower;
     int monsterHP;
     int monsterCurrentHP;
+    int giveExperienceValueToWeapon;
+    int giveExperienceValueToPet;
 
-    public Monster(String monsterName, int monsterAttackPower, int hp) {
+    public Monster(String monsterName, int monsterAttackPower, int hp, int giveExperienceValueToWeapon, int giveExperienceValueToPet) {
         this.monsterName = monsterName;
         this.monsterAttackPower = monsterAttackPower;
         this.monsterHP = hp;
         this.monsterCurrentHP = hp;
+        this.giveExperienceValueToWeapon = giveExperienceValueToWeapon;
+        this.giveExperienceValueToPet = giveExperienceValueToPet;
     }
 
     //Getter
@@ -46,7 +50,7 @@ public class Monster {
         if (this.monsterHP <= 0){
             System.out.println(getMonsterName() + "이(가) 사망했습니다. ☠️");
         } else{
-            System.out.println(System.out.println("HP[ " + getMonsterCurrentHP() + " / " + getMonsterHP()+ " ]");
+            System.out.println("HP[ " + getMonsterCurrentHP() + " / " + getMonsterHP()+ " ]");
         }
     }
 }

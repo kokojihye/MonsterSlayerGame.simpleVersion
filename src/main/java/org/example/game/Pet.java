@@ -1,9 +1,9 @@
 package org.example.game;
 
 public class Pet {
-    int petNum;
-    String petName;
-    int petAttackPower;
+    private int petNum;
+    private String petName;
+    private int petAttackPower;
 
     public Pet(int petNum, String petName, int petAttackPower){
         this.petNum = petNum;
@@ -16,6 +16,10 @@ public class Pet {
 
     public int getPetAttackPower() {
         return petAttackPower;
+    }
+
+    public int getPetNum() {
+        return petNum;
     }
 
     public void setPetAttackPower(int petAttackPower) {
