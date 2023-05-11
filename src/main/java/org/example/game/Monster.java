@@ -31,7 +31,11 @@ public class Monster {
     }
 
     public int getMonsterCurrentHP() {
-        return monsterCurrentHP;
+        if(this.monsterCurrentHP <= 0){
+            return 0;
+        } else {
+            return monsterCurrentHP;
+        }
     }
 
     public int getGiveExperienceValueToWeapon() {
@@ -44,25 +48,21 @@ public class Monster {
 
 
     //Setter
-    public void setMonsterAttackPower(int monsterAttackPower) {
-        this.monsterAttackPower = monsterAttackPower;
-    }
-
     public void setMonsterCurrentHP(int damage) {
         this.monsterCurrentHP -= damage;
     }
 
-
     //Method
     public void monsterAppearNotice(Monster[] monsters, int i) {
-        System.out.println("야생의 " + monsters[i].getMonsterName() + "이(가) 나타났다.");
+        System.out.println(" ");
+        System.out.println(">> 야생의 " + monsters[i].getMonsterName() + "이(가) 나타났다.");
     }
 
     public void monsterCurrentHP() {
         if (this.monsterHP <= 0){
             System.out.println(getMonsterName() + "이(가) 사망했습니다. ☠️");
         } else{
-            System.out.println("HP[ " + getMonsterCurrentHP() + " / " + getMonsterHP()+ " ]");
+            System.out.println(this.monsterName + "의 HP[ " + getMonsterCurrentHP() + " / " + getMonsterHP()+ " ]");
         }
     }
 }

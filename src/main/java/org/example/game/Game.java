@@ -9,13 +9,18 @@ public class Game {
     //몬스터 객체 생성
     Monster[] monsters = {
             new Monster("🐌파란 달팽이", 20, 100, 5, 1),
-            new Monster("🐌빨간 달팽이", 30, 120, 6, 1),
-            new Monster("🐌초록 슬라임", 40, 150, 8, 2),
-            new Monster("🐷리본 돼지", 50, 170, 10, 3),
-            new Monster("🍄주황 버섯", 70, 200, 12, 4),
-            new Monster("🍄초록 버섯", 80, 220, 13, 5),
-            new Monster("🧟‍보스몹", 100, 1000, 100, 20)
+            new Monster("🐌빨간 달팽이", 30, 150, 6, 1),
+            new Monster("🐌초록 슬라임", 50, 200, 8, 2),
+            new Monster("🐷리본 돼지", 70, 250, 10, 3),
+            new Monster("🍄주황 버섯", 100, 400, 12, 4),
+            new Monster("🍄초록 버섯", 120, 600, 13, 5),
+            new Monster("🧟‍보스몹", 300, 1000, 100, 20)
     };
+
+    public Monster[] getMonsters() {
+        return monsters;
+    }
+
     //무기 객체 생성
     Weapon[] weapons = {
             new Weapon(1, " 🗡️초보자의 칼", 16),
@@ -30,7 +35,7 @@ public class Game {
 
     //펫 객체 생성
     Pet[] pets = {
-            //후보생: 🐯(+10) 🐭(-2)
+            //후보생: 🐯(+10) 🐭(-1)
             new Pet(1, "🐹햄스터", 3),
             new Pet(3, "🐰토끼", 4),
             new Pet(2, "🐶강아지", 5),
@@ -52,7 +57,7 @@ public class Game {
         int weaponOptionNum;
         System.out.println("[ :: 무기 선택 옵션 :: ]");
         for (int i = 0; i < 2; i++) { //초보자의 무기만 선택 가능하도록 2번만 반복하도록 조건 걸어둠
-            System.out.println(">> "+ weapons[i].getWeaponName() + "을(를) 선택하려면 숫자" + (i + 1) + "를 입력하세요.");
+            System.out.println(">> " + weapons[i].getWeaponName() + "을(를) 선택하려면 숫자" + (i + 1) + "를 입력하세요.");
         }
         System.out.print("용사가 사용할 무기를 선택하세요️: ");
         weaponOptionNum = sc.nextInt();
@@ -104,6 +109,7 @@ public class Game {
     public void engageInBattle(int i) throws InterruptedException {
         System.out.println("배틀을 시작합니다.");
         int countAttack = 1;
+        soldier.fillSoldierCurrentHP(soldier.getSoldierHP());
 
         while (true) {
             System.out.println(" ");
@@ -124,68 +130,62 @@ public class Game {
 
             //몬스터 후공
             monsterAttackMessage(i);
-            soldier.fillSoldierCurrentHP(soldier.getSoldierHP());
             //용사 체력 차감: 몬스터 공격력
             soldier.setSoldierCurrentHP(monsters[i].getMonsterAttackPower());
             //용사 hp 출력
             soldier.soldierCurrentHP();
 
-            boolean isWin = battleResult(i);
-            if (!isWin) { //패배
-                System.out.println("============== GAME OVER ==============");
+            if (soldier.getSoldierCurrentHP() <= 0) { //용사의 피가 0 이하가 된 경우
+                System.out.println(monsters[i].getMonsterName() + "에게 목숨을 잃었습니다.");
+
+                System.out.println(" >> " + soldier.getCurrentWeaponName() + "을(를) 잃어버렸습니다.");
+                TimeUnit.SECONDS.sleep(2);
+                System.out.println(" >> 🦹🏻사망한 용사 칭호을(를) 획득했습니다.");
+                TimeUnit.SECONDS.sleep(2);
+                System.out.println(" >> " + pets[soldier.getCurrentPetNum()].getPetName() + "은(는) 옆 마을로 도망갔습니다.");
+                TimeUnit.SECONDS.sleep(2);
+                System.out.println(" >> 몬스터들이 마을 사람들을 모두 잡아먹었습니다. 🧟");
+                System.out.println("============== BAD ENDING ==============");
                 System.exit(0);
-            }
-                System.out.println("🌳 🌳 🌳 . . 모험을 계속 진행합니다 . . 🌳 🌳 🌳");
-                TimeUnit.SECONDS.sleep(3);
-                System.out.println(" ");
-        }
-    }
 
-    public boolean battleResult(int i) throws InterruptedException {
-        boolean isSoldierWin;
-        if (soldier.getSoldierCurrentHP() <= 0) {
-            System.out.println(monsters[i].getMonsterName() + "에게 목숨을 잃었습니다.");
-            isSoldierWin = false;
-            return isSoldierWin;
-
-        } else if (monsters[i].getMonsterCurrentHP() <= 0) {
-            System.out.println("축하합니다!🎉" + monsters[i].getMonsterName() + "을(를) 해치웠습니다.");
-            TimeUnit.SECONDS.sleep(2);
-
-
-            System.out.println("축하합니다!🎉" + soldier.getSoldierName() + "의 hp가 +50만큼 증가했습니다.");
-            soldier.setSoldierHP(50); //기존 체력 + 50
-            soldier.setSoldierCurrentHP(soldier.getSoldierHP()); //변경된 hp값만큼 풀피로 채워줌
-            TimeUnit.SECONDS.sleep(2);
-
-
-            System.out.println("축하합니다!🎉" + soldier.getSoldierName() + "의 공격력이 " + 50 + "만큼 증가했습니다.");
-            weapons[soldier.getCurrentWeaponNum() - 1].setWeaponAttackPower(50); //기존 공격력 + 50
-            TimeUnit.SECONDS.sleep(2);
-
-
-            System.out.println("축하합니다!🎉 펫 " + this.soldier.getCurrentPetName() + "의 공격력이" + 5 + "만큼 증가했습니다.");
-            pets[soldier.getCurrentPetNum()].setPetAttackPower(5);
-
-            if (monsters[i].getMonsterName().equals("🧟‍보스몹")) {
-                System.out.println("축하합니다!🎉" + monsters[i].getMonsterName() + "을(를) 해치웠습니다.👏🏻");
+            } else if (monsters[i].getMonsterCurrentHP() <= 0) { //몬스터의 피가 0 이하가 된 경우
+                System.out.println("축하합니다!🎉" + monsters[i].getMonsterName() + "을(를) 해치웠습니다.");
                 TimeUnit.SECONDS.sleep(2);
-                System.out.println(" >> " + weapons[2].getWeaponName() + "을(를) 획득했습니다.👏🏻");
+
+                System.out.println("축하합니다!🎉" + soldier.getSoldierName() + "의 hp가 +50만큼 증가했습니다.");
+                soldier.setSoldierHP(50); //기존 체력 + 50
+                soldier.setSoldierCurrentHP(soldier.getSoldierHP()); //변경된 hp값만큼 풀피로 채워줌
                 TimeUnit.SECONDS.sleep(2);
-                System.out.println(" >> " + weapons[3].getWeaponName() + "을(를) 획득했습니다.👏🏻");
+
+                System.out.println("축하합니다!🎉" + soldier.getSoldierName() + "의 공격력이 +" + monsters[i].getGiveExperienceValueToWeapon() + "만큼 증가했습니다.");
+                weapons[soldier.getCurrentWeaponNum() - 1].setWeaponAttackPower(monsters[i].getGiveExperienceValueToWeapon()); //기존 무기 공격력 + n
                 TimeUnit.SECONDS.sleep(2);
-                System.out.println(" >> 용맹한 용사 칭호을(를) 획득했습니다.👏🏻");
-                TimeUnit.SECONDS.sleep(2);
-                System.out.println(" >> " + pets[soldier.getCurrentPetNum() - 1].getPetName() + "도 집으로 무사히 돌아갔습니다.👏🏻");
-                TimeUnit.SECONDS.sleep(2);
-                System.out.println(" >> 마을에 평화가 찾아왔습니다.👏🏻");
-                System.out.println("============== HAPPY ENDING ==============");
-                System.exit(0);
+
+                System.out.println("축하합니다!🎉펫 " + this.soldier.getCurrentPetName() + "의 공격력이 +" + monsters[i].getGiveExperienceValueToPet() + "만큼 증가했습니다.");
+                pets[soldier.getCurrentPetNum()].setPetAttackPower(monsters[i].getGiveExperienceValueToPet()); //기존 펫 공격력 + n;
+
+                //잡은 몬스터가 보스몹인 경우
+                if (monsters[i].getMonsterName().equals("🧟‍보스몹")) {
+                    System.out.println("축하합니다!🎉" + monsters[i].getMonsterName() + "을(를) 해치웠습니다.👏🏻");
+                    TimeUnit.SECONDS.sleep(2);
+                    System.out.println(" >> " + weapons[2].getWeaponName() + "을(를) 획득했습니다.👏🏻");
+                    TimeUnit.SECONDS.sleep(2);
+                    System.out.println(" >> " + weapons[3].getWeaponName() + "을(를) 획득했습니다.👏🏻");
+                    TimeUnit.SECONDS.sleep(2);
+                    System.out.println(" >> 🦹🏻용맹한 용사 칭호을(를) 획득했습니다.👏🏻");
+                    TimeUnit.SECONDS.sleep(2);
+                    System.out.println(" >> " + pets[soldier.getCurrentPetNum()].getPetName() + "도 집으로 무사히 돌아갔습니다.👏🏻");
+                    TimeUnit.SECONDS.sleep(2);
+                    System.out.println(" >> 마을에 평화가 찾아왔습니다.👏🏻");
+                    System.out.println("============== HAPPY ENDING ==============");
+                    System.exit(0);
+                }
+            break;
             }
         }
-        isSoldierWin = true;
-        return isSoldierWin;
+        System.out.println(" ");
+        System.out.println("  . . 모험을 계속 진행합니다 . . ");
+        TimeUnit.SECONDS.sleep(3);
+        System.out.println(" ");
     }
 }
-
-

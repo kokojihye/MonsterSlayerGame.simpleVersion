@@ -17,7 +17,7 @@ public class Soldier {
     }
 
     public void setSoldierHP(int soldierHP) {
-        this.soldierHP = soldierHP;
+        this.soldierHP += soldierHP;
     }
 
     public void fillSoldierCurrentHP(int hp){
@@ -78,7 +78,7 @@ public class Soldier {
             System.out.println(this.soldierName + "의 hp가 0이 되어 사망했습니다. ☠️");
             //System.out.println("메인 화면으로 돌아갑니다");
         } else{
-            System.out.println("❤️HP[ " + this.soldierCurrentHP + " / " + this.soldierHP + " ]");
+            System.out.println("❤️" + this.soldierName + "의 HP[ " + this.soldierCurrentHP + " / " + this.soldierHP + " ]");
         }
     }
 
