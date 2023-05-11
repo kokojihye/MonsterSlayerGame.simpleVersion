@@ -6,15 +6,14 @@ import org.example.game.*;
 public class Main {
     public static void main(String[] args) throws InterruptedException {
         Game game = new Game();
-
-        Soldier soldier = new Soldier();
         game.setSoldierInformation();
-
+        
         //게임 시작
         System.out.println(" 🌳 🌳 🌳 . . 모험을 시작합니다 . . 🌳 🌳 🌳");
         System.out.println(" ");
-        game.monster1Appears();
-        game.monster2Appears();
-        game.bossMonsterAppears();
+        for (int i = 0; i < game.getMonsters().length; i++) {
+            game.monsterAppears(i);
+            game.engageInBattle(i);
+        }
     }
 }

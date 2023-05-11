@@ -3,117 +3,84 @@ package org.example.game;
 import java.util.Scanner;
 
 public class Soldier {
-    private String name;
-    private String weaponName;
-    private int weaponPower;
-    private String petName;
-    private int petPower;
-    private int hp = 200;
-    int currentHP = hp;
+    private String soldierName;
+    private int soldierHP = 200; //용사의 초기 체력은 200으로 설정
+    private int soldierCurrentHP;
+    private String currentWeaponName;
+    private int currentWeaponNum;
+    private String currentPetName;
+    private int currentPetNum;
 
-
-    public void setName(String name) {
-        this.name = name;
-        System.out.println(" ");
-        System.out.println(">> 입력하신 이름은 "+ this.name + "입니다.");
+    //Setter
+    public void setSoldierName(String soldierName) {
+        this.soldierName = soldierName;
     }
 
-    public void setWeapon(int weapon) {
-        final String weapon1Name = "🗡️ 초보자의 무기 1 ";
-        final int weapon1power = 17;
-        final String weapon2Name = "🏹 초보자의 무기2";
-        final int weapon2power = 30;
-
-        switch (weapon){
-            case 1:
-                this.weaponName = weapon1Name;
-                this.weaponPower = weapon1power;
-                break;
-            case 2:
-                this.weaponName = weapon2Name;
-                this.weaponPower = weapon2power;
-                break;
-            default:
-                System.out.println("1 또는 2를 입력해주세요.");
-                break;
-        }
-        System.out.println(" ");
-        System.out.println(">> 선택한 무기는 " + this.weaponName + "입니다. ");
+    public void setSoldierHP(int soldierHP) {
+        this.soldierHP += soldierHP;
     }
 
-    public void setPet(int pet) {
-        final String pet1Name = "🐱 고양이";
-        final int pet1Power = 5;
-        final String pet2Name = "🐶 강아지";
-        final int pet2Power = 3;
-
-        switch (pet){
-            case 1:
-                this.petName = pet1Name;
-                this.petPower = pet1Power;
-                break;
-            case 2:
-                this.petName = pet2Name;
-                this.petPower = pet2Power;
-                break;
-            case 3:
-                this.petName = "(선택안함)";
-                this.petPower = 0;
-                break;
-            default:
-                System.out.println("1, 2, 3 중 하나를 입력해주세요.");
-                break;
-        }
-        System.out.println(" ");
-        System.out.println(">> 선택하신 펫은 " + this.petName + "입니다.");
-
+    public void fillSoldierCurrentHP(int hp){
+        this.soldierCurrentHP = hp;
     }
 
-    public void setHp(int hp) {
-        this.hp += hp;
+    public void setSoldierCurrentHP(int damage) {
+        this.soldierCurrentHP -= damage;
     }
 
-    public int getHp() {
-        return hp;
+    public void setCurrentWeaponName(String currentWeaponName) {
+        this.currentWeaponName = currentWeaponName;
     }
 
-    public String getName() {
-        return name;
+    public void setCurrentPetName(String currentPetName) {
+        this.currentPetName = currentPetName;
     }
 
-    public String getPetName() {
-        return petName;
+    public void setCurrentWeaponNum(int currentWeaponNum) {
+        this.currentWeaponNum = currentWeaponNum;
     }
 
-    public void setWeaponPower(int weaponPower) {
-        this.weaponPower += weaponPower;
+    public void setCurrentPetNum(int currentPetNum) {
+        this.currentPetNum = currentPetNum;
     }
 
-    public void setPetPower(int petPower) {
-        this.petPower += petPower;
+    //Getter
+    public String getSoldierName() {
+        return soldierName;
     }
 
-    public void soldierStatus() {
-        System.out.println(this.name + "의 hp는 " + this.hp + "입니다.");
-        System.out.println(this.name + "의 현재 공격력은 " + (this.weaponPower + this.petPower) + "입니다.");
+    public int getSoldierHP() {
+        return soldierHP;
     }
-    public void soldierAttackMessage() {
-        System.out.println("몬스터에게 " + (petPower + weaponPower) + "데미지를 입혔습니다. 🩸");
+
+    public int getSoldierCurrentHP() {
+        return soldierCurrentHP;
     }
+
+    public String getCurrentWeaponName() {
+        return currentWeaponName;
+    }
+
+    public String getCurrentPetName() {
+        return currentPetName;
+    }
+
+    public int getCurrentWeaponNum() {
+        return currentWeaponNum;
+    }
+
+    public int getCurrentPetNum() {
+        return currentPetNum;
+    }
+
     public void soldierCurrentHP() {
-        if (this.currentHP <= 0){
-            System.out.println(this.name + "의 hp가 0이 되어 사망했습니다. ☠️");
+        if (this.soldierCurrentHP <= 0){
+            System.out.println(this.soldierName + "의 hp가 0이 되어 사망했습니다. ☠️");
             //System.out.println("메인 화면으로 돌아갑니다");
         } else{
-            System.out.println(this.name + "의 남은 체력: " + this.currentHP);
+            System.out.println("❤️" + this.soldierName + "의 HP[ " + this.soldierCurrentHP + " / " + this.soldierHP + " ]");
         }
     }
 
-    public int getWeaponPower() {
-        return weaponPower;
-    }
 
-    public int getPetPower() {
-        return petPower;
-    }
 }
