@@ -128,7 +128,8 @@ public class Game {
             //몬스터 hp 출력
             monsters[i].monsterCurrentHP();
 
-            if (monsters[i].getMonsterCurrentHP() <= 0) { //몬스터의 피가 0 이하가 된 경우
+            //몬스터의 피가 0 이하가 된 경우
+            if (monsters[i].getMonsterCurrentHP() <= 0) {
                 System.out.println("축하합니다!🎉" + monsters[i].getMonsterName() + "을(를) 해치웠습니다.");
                 TimeUnit.SECONDS.sleep(2);
 
@@ -160,6 +161,7 @@ public class Game {
                     System.out.println("============== HAPPY ENDING ==============");
                     System.exit(0);
                 }
+                //while문(전투) 탈출
                 break;
             }
 
@@ -170,7 +172,8 @@ public class Game {
             //용사 hp 출력
             soldier.soldierCurrentHP();
 
-            if (soldier.getSoldierCurrentHP() <= 0) { //용사의 피가 0 이하가 된 경우
+            //용사의 피가 0 이하가 된 경우
+            if (soldier.getSoldierCurrentHP() <= 0) {
                 System.out.println(monsters[i].getMonsterName() + "에게 목숨을 잃었습니다.");
 
                 System.out.println(" >> " + soldier.getCurrentWeaponName() + "을(를) 잃어버렸습니다.");
@@ -183,10 +186,9 @@ public class Game {
                 System.out.println("============== BAD ENDING ==============");
                 System.exit(0);
             }
-
         }
         System.out.println(" ");
-        System.out.println("  . . 모험을 계속 진행합니다 . . ");
+        System.out.println("🌷  . . 모험을 계속 진행합니다 . . 🌷");
         TimeUnit.SECONDS.sleep(3);
         System.out.println(" ");
     }
