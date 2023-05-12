@@ -23,14 +23,14 @@ public class Game {
 
     //무기 객체 생성
     Weapon[] weapons = {
-            new Weapon(1, " 🗡️초보자의 칼", 16),
-            new Weapon(2, " 🏹초보자의 활", 20),
-            new Weapon(3, " 🗡️중급자의 칼", 24),
-            new Weapon(4, " 🏹중급자의 활", 30),
-            new Weapon(5, " 🗡️상급자의 칼", 32),
-            new Weapon(6, " 🏹상급자의 활", 40),
-            new Weapon(7, " 🗡️마스터의 칼", 100),
-            new Weapon(8, " 🏹마스터의 활", 111)
+            new Weapon(1, "🗡️초보자의 칼", 16),
+            new Weapon(2, "🏹초보자의 활", 20),
+            new Weapon(3, "🗡️중급자의 칼", 24),
+            new Weapon(4, "🏹중급자의 활", 30),
+            new Weapon(5, "🗡️상급자의 칼", 32),
+            new Weapon(6, "🏹상급자의 활", 40),
+            new Weapon(7, "🗡️마스터의 칼", 100),
+            new Weapon(8, "🏹마스터의 활", 111)
     };
 
     //펫 객체 생성
@@ -128,27 +128,7 @@ public class Game {
             //몬스터 hp 출력
             monsters[i].monsterCurrentHP();
 
-            //몬스터 후공
-            monsterAttackMessage(i);
-            //용사 체력 차감: 몬스터 공격력
-            soldier.setSoldierCurrentHP(monsters[i].getMonsterAttackPower());
-            //용사 hp 출력
-            soldier.soldierCurrentHP();
-
-            if (soldier.getSoldierCurrentHP() <= 0) { //용사의 피가 0 이하가 된 경우
-                System.out.println(monsters[i].getMonsterName() + "에게 목숨을 잃었습니다.");
-
-                System.out.println(" >> " + soldier.getCurrentWeaponName() + "을(를) 잃어버렸습니다.");
-                TimeUnit.SECONDS.sleep(2);
-                System.out.println(" >> 🦹🏻사망한 용사 칭호을(를) 획득했습니다.");
-                TimeUnit.SECONDS.sleep(2);
-                System.out.println(" >> " + pets[soldier.getCurrentPetNum()].getPetName() + "은(는) 옆 마을로 도망갔습니다.");
-                TimeUnit.SECONDS.sleep(2);
-                System.out.println(" >> 몬스터들이 마을 사람들을 모두 잡아먹었습니다. 🧟");
-                System.out.println("============== BAD ENDING ==============");
-                System.exit(0);
-
-            } else if (monsters[i].getMonsterCurrentHP() <= 0) { //몬스터의 피가 0 이하가 된 경우
+            if (monsters[i].getMonsterCurrentHP() <= 0) { //몬스터의 피가 0 이하가 된 경우
                 System.out.println("축하합니다!🎉" + monsters[i].getMonsterName() + "을(를) 해치웠습니다.");
                 TimeUnit.SECONDS.sleep(2);
 
@@ -180,8 +160,30 @@ public class Game {
                     System.out.println("============== HAPPY ENDING ==============");
                     System.exit(0);
                 }
-            break;
+                break;
             }
+
+            //몬스터 후공
+            monsterAttackMessage(i);
+            //용사 체력 차감: 몬스터 공격력
+            soldier.setSoldierCurrentHP(monsters[i].getMonsterAttackPower());
+            //용사 hp 출력
+            soldier.soldierCurrentHP();
+
+            if (soldier.getSoldierCurrentHP() <= 0) { //용사의 피가 0 이하가 된 경우
+                System.out.println(monsters[i].getMonsterName() + "에게 목숨을 잃었습니다.");
+
+                System.out.println(" >> " + soldier.getCurrentWeaponName() + "을(를) 잃어버렸습니다.");
+                TimeUnit.SECONDS.sleep(2);
+                System.out.println(" >> 🦹🏻사망한 용사 칭호을(를) 획득했습니다.");
+                TimeUnit.SECONDS.sleep(2);
+                System.out.println(" >> " + pets[soldier.getCurrentPetNum()].getPetName() + "은(는) 옆 마을로 도망갔습니다.");
+                TimeUnit.SECONDS.sleep(2);
+                System.out.println(" >> 몬스터들이 마을 사람들을 모두 잡아먹었습니다. 🧟");
+                System.out.println("============== BAD ENDING ==============");
+                System.exit(0);
+            }
+
         }
         System.out.println(" ");
         System.out.println("  . . 모험을 계속 진행합니다 . . ");
